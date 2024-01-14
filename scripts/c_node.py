@@ -3,7 +3,7 @@
 import rospy
 import math
 from assignment_2_2023.msg import Vel
-from assignment_2_2023.srv import Ave_pos_vel, Ave_pos_velResponse
+from assignment_2_2023.srv import vel_avg, vel_avgResponse
 
 # Position and Velocity Analysis Service Class
 class PosVelAnalyser:
@@ -17,7 +17,7 @@ class PosVelAnalyser:
         rospy.loginfo("Position and Velocity Analysis Service Node Started")
 
         # ROS Service and Subscriber Setup
-        self.service = rospy.Service("position_velocity_analysis", Ave_pos_vel, self.calculate_statistics)
+        self.service = rospy.Service("position_velocity_analysis", vel_avg, self.calculate_statistics)
         rospy.Subscriber("/pos_vel", Vel, self.update_stats)
 
     # Subscriber Callback for Position and Velocity Data
@@ -37,7 +37,7 @@ class PosVelAnalyser:
     # Service Callback for Providing Computed Statistics
     def calculate_statistics(self, _):
         # Constructing Response with Calculated Data
-        return Ave_pos_velResponse(self.total_distance, self.avg_velocity_x)
+        return vel_avgResponse(self.total_distance, self.avg_velocity_x)
 
     # Run the ROS Node
     def run_node(self):
@@ -47,7 +47,7 @@ class PosVelAnalyser:
 if __name__ == "__main__":
     # Service Initialization
     analyser_service = PosVelAnalyser()
-    distance_velocity_service = rospy.ServiceProxy('position_velocity_analysis', Ave_pos_vel)
+    distance_velocity_service = rospy.ServiceProxy('position_velocity_analysis', vel_avg)
 
     while not rospy.is_shutdown():
         # Service Call for Statistics
