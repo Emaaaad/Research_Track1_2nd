@@ -52,7 +52,6 @@ $ roslaunch assignment_2_2023 start_simulation.launch
 
 ## 1. GoalHandler Node - a_node.py
 
-```markdown
 **Description**:
 This Python script serves as a user interface client within the robotic system, enabling users to set goals and cancel ongoing tasks handled by an action server responsible for planning and executing robot movements. It relies on essential ROS modules and custom message types like Vel for position and velocity, as well as action messages like PlanningAction. The `GoalHandler` class initializes a ROS publisher (`/pos_vel` topic) for transmitting velocity and position data and an action client (`/reaching_goal` action server) for interacting with the goal planning system. It continuously listens to the `/odom` topic to acquire the robot's odometry data, allowing users to input commands ('s' for setting a new goal or 'q' for canceling the current goal). The script effectively processes these commands and updates position-velocity information on `/pos_vel`.
 
