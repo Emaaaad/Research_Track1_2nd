@@ -58,9 +58,6 @@ This Python script serves as a user interface client within the robotic system, 
 **Usage**:
 Users can set new goals or cancel ongoing goals through this interface, utilizing the action client to communicate with the goal planning action server while simultaneously updating position-velocity data.
 
-```python
-# Insert code block for nodeA.py here
-
 
 ## 2. Last Target Service Node - b_node.py
 **Description**:
@@ -69,16 +66,10 @@ This ROS node acts as a service client within the robotic system, catering to se
 **Usage**:
 Other components of the system can request the last desired x and y positions using the 'input' service, and this node responds with the requested information.
 
-```python
-# Insert code block for nodeB.py here
-
 ## 3. Info Service and Subscriber Node - c_node.py
 **Description**:
 This versatile ROS node performs the roles of both a service client and a subscriber within the robotic system. It is responsible for calculating the distance between desired and actual positions and computing the average velocity within a specified window. The script imports the necessary ROS modules, custom message types, and the math module for distance calculations. The `InfoService` class within the script initializes variables for tracking average velocity and distance, provides an 'info_service' service, and subscribes to the '/pos_vel' topic. The callback function, `get_distance_and_average_velocity`, extracts information regarding desired and actual positions, the velocity window size, and subsequently computes the distance and average velocity. Another callback function, part of the 'info_service' service, responds to requests by providing the calculated distance and average velocity. The node's `spin()` method ensures continuous operation, and the main function orchestrates the instantiation of the `InfoService` class.
 
 **Usage**:
 This node offers real-time information about distance and average velocity, serving as both a service provider for other system components and a subscriber to '/pos_vel' for continuous updates.
-
-```python
-# Insert code block for nodeC.py here
 
