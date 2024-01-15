@@ -14,26 +14,22 @@ The node also publishes the robot position and velocity as a custom message (x,y
 
 The assignment also necessitates the creation of a launch file to initiate the entire simulation.
 
+
 Installing and running
 ----------------------
 
 The simulator requires a ROS installation, this repository [RT1_assignment_2](https://github.com/Emaaaad/Research_Track1_2nd.git) and the xterm installation.
 
-To get the RT1_assignment_2 package click on the link above or use the following command
+To get the RT1_assignment_2 package click on the link above or use the following command:
 
 ```bash
 $ git clone https://github.com/Emaaaad/Research_Track1_2nd.git
 
 To install xterm use the command:
 
-bash
-
 $ sudo apt-get -y install xterm
 
-Before running the program make sure that the python files have the permission to be executed. To do so use the following commands inside the scrips folder:
-
-bash
-
+Before running the program make sure that the python files have the permission to be executed. To do so use the following commands inside the scripts folder:
 $ chmod +x node_a.py
 $ chmod +x node_b.py
 $ chmod +x node_c.py
@@ -42,8 +38,6 @@ $ chmod +x go_to_point_service.py
 $ chmod +x wall_follow_service.py 
 
 To run the program use the command:
-
-bash
 
 $ roslaunch assignment_2_2023 assignment1.launch
 
