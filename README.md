@@ -37,63 +37,63 @@ $ roslaunch assignment_2_2023 assignment1.launch
 
 
 Nodes
-node_a.py
+-----
+
+### node_a.py ###
 
 This Python script creates a ROS node for robot interaction within a ROS environment. It enables the user to assign new targets (by inputting 'y') or abort (by inputting 'c') the existing target for the robot, while also broadcasting the robot's current location and speed.
-node_b.py
+
+### node_b.py ###
 
 This Python script defines a ROS node that provides a service to return the last desired position of a robot. It provides a service named 'input' that returns the target positions when called.
 
 To visualize the information, you can call the service using the following command in a new terminal:
 
-bash
-
+```bash
 $ rosservice call /input
 
 This will return the last desired x and y positions of the robot.
-node_c.py
+
+### node_c.py ###
 
 This Python script defines a ROS node that provides a service to return the average velocity and the distance between the current and desired positions of a robot. It subscribes to the /pos_vel topic to update these values and provides a service named 'info_service' that returns these values.
+
 Pseudocode
+----------
 
-    Import necessary libraries
-
-    Define the GoalHandler class
-
-        Initialize the class
-            Create a publisher to the /pos_vel topic
-            Create an action client for the /reaching_goal action server
-            Wait for the action server to be available
-            Initialize a flag to indicate if the current goal has been cancelled
-
-        Define the handle_goal_commands method
-            Loop until ROS is shutdown
-                Subscribe to the /odom topic and call publish_position_velocity method when a message is received
-                Prompt the user to enter a command
-                Get the current target position from the parameter server
-                Create a new goal with the current target position
-                If the user command is 'y'
-                    Prompt the user to enter the x and y coordinates for the new goal
-                    If the input is valid, update the target position parameters and the goal
-                    Send the new goal to the action server
-                    Update the goal cancelled flag
-                If the user command is 'c'
-                    If there is an active goal, cancel it and update the goal cancelled flag
-                Log the last received goal
-
-        Define the publish_position_velocity method
-            Extract the current position and velocity from the Odometry message
-            Create a new Vel message with the current position and velocity
-            Publish the Vel message
-
-    Define the main function
-        Initialize the node
-        Create an instance of the GoalHandler class
-        Call the handle_goal_commands method of the GoalHandler instance
-
-    If the script is the main program, call the main function
+1. Import necessary libraries
+2. Define the `GoalHandler` class
+   - Initialize the class
+     - Create a publisher to the /pos_vel topic
+     - Create an action client for the /reaching_goal action server
+     - Wait for the action server to be available
+     - Initialize a flag to indicate if the current goal has been cancelled
+   - Define the `handle_goal_commands` method
+     - Loop until ROS is shutdown
+       - Subscribe to the /odom topic and call `publish_position_velocity` method when a message is received
+       - Prompt the user to enter a command
+       - Get the current target position from the parameter server
+       - Create a new goal with the current target position
+       - If the user command is 'y'
+         - Prompt the user to enter the x and y coordinates for the new goal
+         - If the input is valid, update the target position parameters and the goal
+         - Send the new goal to the action server
+         - Update the goal cancelled flag
+       - If the user command is 'c'
+         - If there is an active goal, cancel it and update the goal cancelled flag
+     - Log the last received goal
+   - Define the `publish_position_velocity` method
+     - Extract the current position and velocity from the Odometry message
+     - Create a new Vel message with the current position and velocity
+     - Publish the Vel message
+3. Define the `main` function
+   - Initialize the node
+   - Create an instance of the `GoalHandler` class
+   - Call the `handle_goal_commands` method of the `GoalHandler` instance
+4. If the script is the main program, call the `main` function
 
 Possible improvements
+---------------------
 
 This section outlines potential enhancements for the code.
 
