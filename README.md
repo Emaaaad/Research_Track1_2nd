@@ -111,3 +111,14 @@ This versatile ROS node performs the roles of both a service client and a subscr
 **Usage**:
 This node offers real-time information about distance and average velocity, serving as both a service provider for other system components and a subscriber to '/pos_vel' for continuous updates.
 
+### Additional Scripts
+
+## bug_as.py 
+The bug_as.py script manages the robot's navigation and obstacle avoidance. It subscribes to '/odom' for odometry data and '/scan' for laser scan data, enabling the robot to understand its environment. The script utilizes a state machine with states like 'Go to point' and 'Wall following' to dynamically navigate while avoiding obstacles. It employs action servers for goal management and service clients to toggle navigation behaviors. The script ensures the robot safely reaches its target by adapting its path in response to detected obstacles and provides continuous feedback on its status. This functionality is central to the autonomous navigation capabilities of the robot.
+
+## bug_as.py
+The go_to_point_service.py script enables a robot to autonomously navigate to a specified target location. It actively listens to odometry data to determine the robot's current position and orientation. The script employs a state machine approach, adjusting the robot's yaw to align with the target direction, and then moving straight towards the target. It manages this navigation through proportional controllers for both angular and linear movements, ensuring smooth and accurate reaching of the destination. The script also includes a service to toggle this navigation behavior on or off, allowing for dynamic control during the robot's operation. This functionality is essential for tasks requiring precise point-to-point navigation in robotic applications.
+
+## wall_follow_service.py
+The `wall_follow_service.py` script equips a robot with wall-following capabilities, a crucial aspect of autonomous navigation in environments with obstacles. By processing laser scan data, the script dynamically determines the proximity of walls and obstacles around the robot. It implements a state machine with states like 'find the wall', 'turn left', and 'follow the wall', enabling the robot to adapt its movement based on its surroundings. The script controls the robot's linear and angular velocities to maintain a safe distance from walls while navigating. Additionally, it includes a service to activate or deactivate the wall-following behavior, allowing for flexible use within various navigational tasks. This script is particularly valuable for navigating through corridors or around obstacles where precise maneuvering is required.
+
