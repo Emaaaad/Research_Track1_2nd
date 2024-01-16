@@ -8,21 +8,40 @@
 ### Project Description
 This assignment in Research Track I course focuses on developing a ROS package to manage a robot's movement within a Gazebo simulation. The project encapsulates three ROS nodes, each contributing to different aspects of the robot's navigation and data processing.
 
+
 ### Node Overview
 - **Navigation Node (Node A):** Manages target settings for robot navigation using an action client, allowing setting and cancellation of (x, y) coordinates. Monitors feedback from the action server for target status and also transmits robot's positional and velocity data.
 - **Target Retrieval Node (Node B):** Provides a service to fetch the last set target coordinates for the robot.
 - **Data Processing Node (Node C):** Subscribes to the robot's position and velocity data, offering services to calculate and return the average speed and the distance from the set target.
 
+## Prerequisites
+- ROS (Robot Operating System) [Recommended Version: Noetic]
+- Python 3.x
+- Relevant ROS packages: `geometry_msgs`, `nav_msgs`, `sensor_msgs`, `tf`, `actionlib`, `std_srvs`
+
+## Installation
+Clone the repository into your ROS workspace:
+```bash
+cd ~/catkin_ws/src
+```
+```bash
+git clone https://github.com/Emaaaad/Research_Track1_2nd.git
+```
 
 ## Permissions for running
 Ensure executable permissions for Python files inside the 'scripts' folder:
 
 ```bash
     chmod +x scripts/nodeA.py
+```bash
     chmod +x scripts/nodeB.py
+```bash
     chmod +x scripts/nodeC.py
+```bash
     chmod +x scripts/bug_as.py
+```bash
     chmod +x scripts/go_to_point_service.py
+```bash
     chmod +x scripts/wall_follow_service.py
 ```
 
