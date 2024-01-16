@@ -56,9 +56,6 @@ The project requires a functioning ROS environment, access to this [GitHub Repos
 Execute the following commands in your terminal for setup and execution:
 
 ```bash
-# Clone the repository
-$ git clone https://github.com/Emaaaad/Research_Track1_2nd.git
-
 # Install xterm
 $ sudo apt-get -y install xterm
 
@@ -82,6 +79,23 @@ This Python script serves as a user interface client within the robotic system, 
 **Usage**:
 Users can set new goals or cancel ongoing goals through this interface, utilizing the action client to communicate with the goal planning action server while simultaneously updating position-velocity data.
 
+**Pseudocode for Node A:**
+```bash
+```python
+Class GoalHandler:
+    Initialize node, publishers, and action client
+    Process goals:
+        While ROS is running:
+            Subscribe to Odometry data
+            Get user input for goal management
+            Set or cancel goals based on user input
+            Publish velocity and position data
+
+   Main:
+      Initialize ROS node
+      Create instance of GoalHandler
+      Run the goal processing loop
+```
 
 ## 2. Last Target Service Node - b_node.py
 **Description**:
