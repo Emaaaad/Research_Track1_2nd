@@ -111,7 +111,7 @@ This versatile ROS node performs the roles of both a service client and a subscr
 **Usage**:
 This node offers real-time information about distance and average velocity, serving as both a service provider for other system components and a subscriber to '/pos_vel' for continuous updates.
 
-### Additional Scripts
+# Additional Scripts
 
 ## bug_as.py 
 The bug_as.py script manages the robot's navigation and obstacle avoidance. It subscribes to '/odom' for odometry data and '/scan' for laser scan data, enabling the robot to understand its environment. The script utilizes a state machine with states like 'Go to point' and 'Wall following' to dynamically navigate while avoiding obstacles. It employs action servers for goal management and service clients to toggle navigation behaviors. The script ensures the robot safely reaches its target by adapting its path in response to detected obstacles and provides continuous feedback on its status. This functionality is central to the autonomous navigation capabilities of the robot.
