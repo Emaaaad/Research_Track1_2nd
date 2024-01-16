@@ -85,6 +85,7 @@ catkin_make
 ```bash
 roscore
 ```
+This command will compile your code and generate the necessary setup files.
 
 ### 2. Launch the Project:
 In a new terminal, navigate to your ROS workspace and source the setup file if not already done:
@@ -94,6 +95,7 @@ source devel/setup.bash
 ```
 
 ### 3. launch the project by executing:
+Then launch the project by executing:
 ```bash
 roslaunch assignment1.launch
 ```
