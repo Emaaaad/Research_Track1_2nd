@@ -73,34 +73,31 @@ $ roslaunch assignment_2_2023 start_simulation.launch
 ```
 
 # Running the Project
-### 0. Build
+### 1. Build
 Navigate to your ROS workspace. If you're using the default ROS workspace, it's usually named catkin_ws. after that use the catkin_make command to build your ROS packages:
 ```bash
 cd ~/catkin_ws
 catkin_make
 ```
 
-### 1. Start the ROS Master:
+### 2. Start the ROS Master:
   Open a new terminal and start the ROS master:
 ```bash
 roscore
 ```
 This command will compile your code and generate the necessary setup files.
 
-### 2. Launch the Project:
+### 3. Launch the Project:
 In a new terminal, navigate to your ROS workspace and source the setup file if not already done:
 ```bash
 cd ~/catkin_ws
 source devel/setup.bash
 ```
-
-### 3. launch the project by executing:
 Then launch the project by executing:
 ```bash
 roslaunch assignment1.launch
 ```
-
-
+This launch file will start all the necessary nodes and services as defined for the project. It's a convenient way to get the entire system up and running with a single command.
 
 # System Nodes
 
