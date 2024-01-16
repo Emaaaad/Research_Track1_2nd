@@ -1,5 +1,5 @@
 # Advanced Robotics Navigation Assignment
-## Research Track I - Second Task
+## Research Track I - Second Assignment
 **Student:** [Seyed Emad Razavi](https://github.com/Emaaaad) (5782734)  
 **Professor:** [Carmine Tommaso Recchiuto](https://github.com/CarmineD8)
 
