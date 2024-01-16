@@ -33,14 +33,19 @@ Ensure executable permissions for Python files inside the 'scripts' folder:
 
 ```bash
     chmod +x scripts/nodeA.py
+```
 ```bash
     chmod +x scripts/nodeB.py
+```
 ```bash
     chmod +x scripts/nodeC.py
+```
 ```bash
     chmod +x scripts/bug_as.py
+```
 ```bash
     chmod +x scripts/go_to_point_service.py
+```
 ```bash
     chmod +x scripts/wall_follow_service.py
 ```
