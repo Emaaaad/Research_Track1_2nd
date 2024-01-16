@@ -91,6 +91,9 @@ This command will compile your code and generate the necessary setup files.
 In a new terminal, navigate to your ROS workspace and source the setup file if not already done:
 ```bash
 cd ~/catkin_ws
+```
+Then:
+```bash
 source devel/setup.bash
 ```
 Then launch the project by executing:
