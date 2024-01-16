@@ -58,13 +58,16 @@ Execute the following commands in your terminal for setup and execution:
 ```bash
 # Install xterm
 $ sudo apt-get -y install xterm
-
+```
+```bash
 # Change directory to the repository folder
 $ cd Research_Track1_2nd
-
+```
+```bash
 # Ensure scripts are executable
 $ chmod +x src/assignment_2_2023/scripts/*.py
-
+```
+```bash
 # Launch the simulation
 $ roslaunch assignment_2_2023 start_simulation.launch
 ```
