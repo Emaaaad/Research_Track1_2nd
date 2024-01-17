@@ -50,27 +50,6 @@ Ensure executable permissions for Python files inside the 'scripts' folder:
     chmod +x scripts/wall_follow_service.py
 ```
 
-### Setting Up and Executing the Project
-The project requires a functioning ROS environment, access to this [GitHub Repository](https://github.com/Emaaaad/Research_Track1_2nd.git), and xterm installed on your system.
-
-Execute the following commands in your terminal for setup and execution:
-
-```bash
-# Install xterm
-$ sudo apt-get -y install xterm
-```
-```bash
-# Change directory to the repository folder
-$ cd Research_Track1_2nd
-```
-```bash
-# Ensure scripts are executable
-$ chmod +x src/assignment_2_2023/scripts/*.py
-```
-```bash
-# Launch the simulation
-$ roslaunch assignment_2_2023 start_simulation.launch
-```
 
 # Running the Project
 ### 1. Build
@@ -98,7 +77,7 @@ source devel/setup.bash
 ```
 Then launch the project by executing:
 ```bash
-roslaunch assignment1.launch
+$ roslaunch assignment_2_2023 start_simulation.launch
 ```
 This launch file will start all the necessary nodes and services as defined for the project. It's a convenient way to get the entire system up and running with a single command.
 
