@@ -51,9 +51,9 @@
 <li class="toctree-l1"><a class="reference internal" href="installation_guide.html">Installation Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="running_the_project.html">Running the Project</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">System Nodes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#goalhandler-node-nodea-py">GoalHandler Node (nodeA.py)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#last-target-retrieval-node-nodeb-py">Last Target Retrieval Node (nodeB.py)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-processing-node-nodec-py">Data Processing Node (nodeC.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#my-node-a-module-node-a-py">my_node_A Module (node_a.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#my-node-b-module-node-b-py">my_node_B Module (node_b.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#my-node-c-module-node-c-py">my_node_C Module (node_c.py)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="additional_scripts.html">Additional Scripts</a></li>
@@ -87,43 +87,162 @@
   <section id="system-nodes">
 <h1>System Nodes<a class="headerlink" href="#system-nodes" title="Permalink to this heading"></a></h1>
 <p>This section provides details on the system nodes developed for the ROS package, focusing on their roles within the robotic navigation system.</p>
-<section id="goalhandler-node-nodea-py">
-<h2>GoalHandler Node (nodeA.py)<a class="headerlink" href="#goalhandler-node-nodea-py" title="Permalink to this heading"></a></h2>
-<p><strong>Description</strong>: Manages target settings for robot navigation using an action client. It monitors feedback for target status and transmits the robot’s positional and velocity data.</p>
-<p><strong>Key Features</strong>:</p>
+<section id="my-node-a-module-node-a-py">
+<h2>my_node_A Module (node_a.py)<a class="headerlink" href="#my-node-a-module-node-a-py" title="Permalink to this heading"></a></h2>
+<p><strong>synopsis</strong>:</p>
+<p>Python module for the assignment_2_2023.</p>
+<p><strong>Description</strong>:</p>
+<p>A node that implements an action client, allowing the user to set a target (x, y) or to cancel an already given target. The node also publishes the robot’s position and velocity as a custom message (x, y, vel_x, vel_z), by relying on the values published on the topic <cite>/odom</cite>.</p>
+<p>Subscribes to:</p>
 <ul class="simple">
-<li><p>Setting and cancellation of (x, y) coordinates</p></li>
-<li><p>Monitoring feedback from the action server</p></li>
-<li><p>Transmitting robot’s positional and velocity data</p></li>
+<li><p><cite>/odom</cite></p></li>
+</ul>
+<p>Publishes to:</p>
+<ul class="simple">
+<li><p><cite>/kinematics</cite></p></li>
+</ul>
+<p>Service:</p>
+<ul class="simple">
+<li><p>None</p></li>
+</ul>
+<p>Action client:</p>
+<ul class="simple">
+<li><p><cite>/reaching_goal</cite></p></li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<ul>
+<li><p><strong>main():</strong> Main function to make the robot move towards different targets</p>
+<blockquote>
+<div><p>Parameters:</p>
+<blockquote>
+<div><p>none</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>none</p>
+</div></blockquote>
+<p>In the main function, the node_a is first initialized and the target x and y positions (x_t and y_t) are extracted from the launch file (assignment1.launch). Then a question is asked from the user to decide whether he wants to change the goal or cancel the current goal. If ‘Cancel’ is chosen, the robot will stop moving. If ‘Change’ is chosen, the robot asks for the new x and y targets and then sends the new targets (goal_new) to the launch file and to the client.</p>
+</div></blockquote>
+</li>
+<li><p><strong>publish_kinematics(msg):</strong> Callback function of the topic <cite>/odom</cite> to calculate the position and velocity of the robot</p>
+<blockquote>
+<div><p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>msg (Pose): Robot’s position and velocity information</p></li>
+</ul>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>none</p>
+</div></blockquote>
+<p>This function gets the required odometry information of the robot using the <cite>/odom</cite> topic and then extracts the x and y positions of the robot and also linear and angular velocities of the robot and publishes them on the topic <cite>/kinematics</cite> in the <cite>pos_vel</cite> variable.</p>
+</div></blockquote>
+</li>
 </ul>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>your_package_name<span class="w"> </span>nodeA.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>assignment_2_2023<span class="w"> </span>node_a.py
 </pre></div>
 </div>
 </section>
-<section id="last-target-retrieval-node-nodeb-py">
-<h2>Last Target Retrieval Node (nodeB.py)<a class="headerlink" href="#last-target-retrieval-node-nodeb-py" title="Permalink to this heading"></a></h2>
-<p><strong>Description</strong>: Provides a service to fetch the last set target coordinates for the robot, acting as a crucial component for target management within the navigation system.</p>
-<p><strong>Key Features</strong>:</p>
+<section id="my-node-b-module-node-b-py">
+<h2>my_node_B Module (node_b.py)<a class="headerlink" href="#my-node-b-module-node-b-py" title="Permalink to this heading"></a></h2>
+<p><strong>synopsis</strong>:</p>
+<p>A service node for the assignment_2_2023 to show the last target.</p>
+<p><strong>Description</strong>:</p>
+<p>This node gets the last imported target by the user from the launch file and displays it as the output when the service is called.</p>
+<p><strong>Service</strong>:</p>
 <ul class="simple">
-<li><p>Fetching last set target coordinates</p></li>
-<li><p>Service-based communication</p></li>
+<li><p><cite>last_target</cite></p></li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<ul>
+<li><p><strong>main():</strong> Main function to initialize the node and the service.</p></li>
+<li><p><strong>put_target(req):</strong> Callback function of the service <cite>last_target</cite> to extract the last chosen target.</p>
+<blockquote>
+<div><p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>req (LastTarget): Request for the last target display</p></li>
+</ul>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The x and y for the last chosen target</p></li>
+</ul>
+</div></blockquote>
+<p>Return type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LastTargetResponse</p></li>
+</ul>
+</div></blockquote>
+<p>This function extracts the desired x and y positions (<cite>des_pos_x</cite> and <cite>des_pos_y</cite>) from <cite>assignment1.launch</cite> and stores them into the response variable of the service (<cite>res</cite>).</p>
+</div></blockquote>
+</li>
 </ul>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>your_package_name<span class="w"> </span>nodeB.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>assignment_2_2023<span class="w"> </span>node_b.py
 </pre></div>
 </div>
 </section>
-<section id="data-processing-node-nodec-py">
-<h2>Data Processing Node (nodeC.py)<a class="headerlink" href="#data-processing-node-nodec-py" title="Permalink to this heading"></a></h2>
-<p><strong>Description</strong>: Subscribes to the robot’s position and velocity data, calculating and returning the average speed and the distance from the set target through services.</p>
-<p><strong>Key Features</strong>:</p>
+<section id="my-node-c-module-node-c-py">
+<h2>my_node_C Module (node_c.py)<a class="headerlink" href="#my-node-c-module-node-c-py" title="Permalink to this heading"></a></h2>
+<p><strong>synopsis</strong>:</p>
+<p>A service node for the assignment_2_2023 to show the distance and average speed.</p>
+<p><strong>Description</strong>:</p>
+<p>This node is a part of Assignment 2 for the year 2023. It calculates the distance and average speed based on received messages from the <cite>/kinematics</cite> topic. The calculations involve calling the <cite>last_target</cite> service to retrieve the target coordinates and then processing the incoming velocity messages to compute the distance and average speed.</p>
+<p><strong>Service</strong>:</p>
 <ul class="simple">
-<li><p>Subscribing to robot’s position and velocity data</p></li>
-<li><p>Calculating average speed and distance from the target</p></li>
+<li><p><cite>average</cite></p></li>
+<li><p><cite>last_target</cite></p></li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<ul>
+<li><p><strong>main():</strong> Main function for the service average</p></li>
+<li><p><strong>give_avg(req):</strong> Callback function of the service <cite>average</cite> to compute the average distance and velocity.</p>
+<blockquote>
+<div><p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>req (AverageRequest): Average request.</p></li>
+</ul>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Distance to target and average velocity.</p></li>
+</ul>
+</div></blockquote>
+<p>Return type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>AverageResponse</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p><strong>get_average(msg):</strong> Callback function of the topic <cite>/kinematics</cite> to compute the distance and average velocity.</p>
+<blockquote>
+<div><p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>msg (Pose): Robot’s position and velocity information</p></li>
+</ul>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>None</p></li>
+</ul>
+</div></blockquote>
+<p>This function gets the position and velocity of the robot from the <cite>/kinematics</cite> topic and then based on the <cite>average_window</cite> parameter extracted from the launch file, computes the distance from the last chosen target and also computes the average linear velocity of the robot over the given window.</p>
+</div></blockquote>
+</li>
 </ul>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>your_package_name<span class="w"> </span>nodeC.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosrun<span class="w"> </span>assignment_2_2023<span class="w"> </span>node_c.py
 </pre></div>
 </div>
 </section>

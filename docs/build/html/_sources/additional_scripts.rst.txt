@@ -17,7 +17,7 @@ Bug Algorithm Script (bug_as.py)
 
 .. code-block:: bash
 
-    rosrun your_package_name bug_as.py
+    rosrun assignment_2_2023 bug_as.py
 
 Go-to-Point Service (go_to_point_service.py)
 --------------------------------------------
@@ -33,7 +33,7 @@ Go-to-Point Service (go_to_point_service.py)
 
 .. code-block:: bash
 
-    rosrun your_package_name go_to_point_service.py
+    rosrun assignment_2_2023 go_to_point_service.py
 
 Wall Following Service (wall_follow_service.py)
 ------------------------------------------------
@@ -49,4 +49,4 @@ Wall Following Service (wall_follow_service.py)
 
 .. code-block:: bash
 
-    rosrun your_package_name wall_follow_service.py
+    rosrun assignment_2_2023 wall_follow_service.py
